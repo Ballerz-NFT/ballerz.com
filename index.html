@@ -49,14 +49,14 @@ body {
 
 .speech-bubble {
   position: relative;
-  background: #ffffff;
+  background: var(--foreground-rgb);
   border-radius: 0.4em;
   padding: 1.5rem;
   margin-top: 3rem;
   width: 16rem;
   font-size: 1.25rem;
   line-height: 1.75rem;
-  color: #000000;
+  color: var(--background-start-rgb);
 }
 
 .speech-bubble:after {
@@ -67,7 +67,7 @@ body {
   width: 0;
   height: 0;
   border: 20px solid transparent;
-  border-top-color: #ffffff;
+  border-top-color: var(--foreground-rgb);
   border-bottom: 0;
   border-left: 0;
   margin-left: -10px;
