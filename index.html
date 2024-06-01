@@ -21,29 +21,72 @@
   <meta name="theme-color" content="#fafafa">
 
   <style>
-    body {
-      text-align: center;
-    }
+    
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
 
-    ul {
-      list-style: none;
-    }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+    
+    text-align: center;
+}
+
+.speech-bubble {
+  position: relative;
+  background: #ffffff;
+  border-radius: 0.4em;
+}
+
+.speech-bubble:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border: 20px solid transparent;
+  border-top-color: #ffffff;
+  border-bottom: 0;
+  border-left: 0;
+  margin-left: -10px;
+  margin-bottom: -20px;
+}
+
+ul {
+  list-style: none;
+  }
   </style>
 </head>
 
 <body>
 
-  <h1>Ballerz is now community owned! <br> New site in-progress</h1>
-
+  <p className="speech-bubble w-64 text-xl text-black p-6 mx-auto mt-12">
+          Probably nothing...
+        </p>
+  
+    <img src="https://ballerz.cloud/images/ballerz/9383/" />
+  
   <ul>
     <li><a href="https://x.com/BALLERZ_NFT" target="_blank">Twitter</a></li>
     <li><a href="https://discord.gg/qbuMQgTf8K" target="_blank">Discord</a></li>
   </ul>
-
-  <div class="pfps">
-    <img src="https://ballerz.cloud/images/ballerz/9383/" />
-    <img src="https://ballerz.cloud/images/ballerz/6166/" />
-  </div>
 
 </body>
 
