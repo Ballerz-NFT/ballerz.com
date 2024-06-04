@@ -47,6 +47,24 @@ body {
   margin-bottom: -20px;
 }
 
+.spotlight {
+  background: linear-gradient(
+    to right,
+    #ff416c,
+    #ff4b2b,
+    #ff6a00,
+    #f7931e,
+    #f9d423
+  );
+  border-radius: 0.8em;
+  padding: 0.6em;
+}
+
+.signup {
+  background: #fff;
+  border-radius: 0.4em;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
