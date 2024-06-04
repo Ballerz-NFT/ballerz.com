@@ -57,12 +57,18 @@ body {
     #f9d423
   );
   border-radius: 0.8em;
-  padding: 0.6em;
+  padding: 0.5em;
 }
 
 .signup {
   background: #fff;
   border-radius: 0.4em;
+}
+
+@media screen and (max-width: 530px) {
+  .signup {
+    width: 100%;
+  }
 }
 
 @layer utilities {
