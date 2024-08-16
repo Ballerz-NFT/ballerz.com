@@ -24,7 +24,7 @@ export default function Home() {
         </nav>
 
         <p className="speech-bubble w-64 text-xl text-black p-6 mx-auto mt-12">
-          Now community owned!
+          Now community owned! Come ball with us at <a href="https://bbl.center">bbl.center</a>!
         </p>
 
         <Image
