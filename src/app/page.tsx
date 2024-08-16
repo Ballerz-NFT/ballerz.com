@@ -21,10 +21,14 @@ export default function Home() {
           <a href="https://discord.gg/qbuMQgTf8K" target="_blank">
             Discord
           </a>
+          <span className="mx-2"> </span>
+          <a href="https://bbl.center" target="_blank">
+            Learn More
+          </a>
         </nav>
 
         <p className="speech-bubble w-64 text-xl text-black p-6 mx-auto mt-12">
-          Now community owned! Come ball with us at <a href="https://bbl.center">bbl.center</a>!
+          Now community owned! Come <a href="https://bbl.cbbl.center" className="underline">ball with us</a>!
         </p>
 
         <Image
