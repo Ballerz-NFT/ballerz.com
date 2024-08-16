@@ -23,12 +23,12 @@ export default function Home() {
           </a>
           <span className="mx-2"> </span>
           <a href="https://bbl.center" target="_blank">
-            Learn More
+            Play
           </a>
         </nav>
 
         <p className="speech-bubble w-64 text-xl text-black p-6 mx-auto mt-12">
-          Now community owned! Come <a href="https://bbl.cbbl.center" className="underline">ball with us</a>!
+          Now community owned! Come <br><a href="https://bbl.cbbl.center" className="underline">ball with us</a>!
         </p>
 
         <Image
