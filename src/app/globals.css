@@ -1,73 +1,73 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer utilities {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
   }
-}
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --foreground-rgb: 255, 255, 255;
+      --background-start-rgb: 0, 0, 0;
+      --background-end-rgb: 0, 0, 0;
+    }
+  }
 
-.speech-bubble {
-  position: relative;
-  background: #ffffff;
-  border-radius: 0.4em;
-}
+  body {
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgb(var(--background-end-rgb))
+      )
+      rgb(var(--background-start-rgb));
+  }
 
-.speech-bubble:after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border: 20px solid transparent;
-  border-top-color: #ffffff;
-  border-bottom: 0;
-  border-left: 0;
-  margin-left: -10px;
-  margin-bottom: -20px;
-}
+  .speech-bubble {
+    position: relative;
+    background: #ffffff;
+    border-radius: 0.4em;
+  }
 
-.spotlight {
-  background: linear-gradient(
-    to right,
-    #ff416c,
-    #ff4b2b,
-    #ff6a00,
-    #f7931e,
-    #f9d423
-  );
-  border-radius: 0.8em;
-  padding: 0.5em;
-}
+  .speech-bubble:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-top-color: #ffffff;
+    border-bottom: 0;
+    border-left: 0;
+    margin-left: -10px;
+    margin-bottom: -20px;
+  }
 
-.signup {
-  background: #fff;
-  border-radius: 0.4em;
-}
+  .spotlight {
+    background: linear-gradient(
+      to right,
+      #ff416c,
+      #ff4b2b,
+      #ff6a00,
+      #f7931e,
+      #f9d423
+    );
+    border-radius: 0.8em;
+    padding: 0.5em;
+  }
 
-@media screen and (max-width: 530px) {
   .signup {
-    width: 100%;
+    background: #fff;
+    border-radius: 0.4em;
+  }
+
+  @media screen and (max-width: 530px) {
+    .signup {
+      width: 100%;
+    }
   }
 }
 
