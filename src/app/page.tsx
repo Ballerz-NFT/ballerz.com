@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -6,13 +7,15 @@ export default function Home() {
       <main className="flex min-h-screen flex-col items-center py-12 px-4">
         <header className="w-full text-center">
           {/* <h1 className="text-4xl uppercase">Ballerz</h1> */}
-          <Image
-            src="/images/logo.png"
-            width={320}
-            height={60}
-            alt="Ballerz"
-            className="mx-auto pb-4"
-          />
+          <Link href="/">
+            <Image
+              src="/images/logo.png"
+              width={320}
+              height={60}
+              alt="Ballerz"
+              className="mx-auto pb-4"
+            />
+          </Link>
 
           <nav className="font-bold text-center text-lg pb-4">
             <a href="https://x.com/BALLERZ_NFT" target="_blank">
