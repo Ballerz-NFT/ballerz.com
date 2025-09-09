@@ -1,0 +1,1 @@
+ALTER TABLE "sneakerz" ALTER COLUMN "accessory" DROP NOT NULL;

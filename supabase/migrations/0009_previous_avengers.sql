@@ -1,0 +1,1 @@
+ALTER TABLE "sneakerz" ALTER COLUMN "team_id" DROP NOT NULL;

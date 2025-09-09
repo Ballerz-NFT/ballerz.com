@@ -1,0 +1,1 @@
+ALTER TABLE "ballerz" RENAME COLUMN "img" TO "image";

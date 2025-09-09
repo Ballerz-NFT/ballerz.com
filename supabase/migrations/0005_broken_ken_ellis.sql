@@ -1,0 +1,1 @@
+ALTER TYPE "public"."hair_color" ADD VALUE 'Custom';
