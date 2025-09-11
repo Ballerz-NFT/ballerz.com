@@ -7,6 +7,7 @@ import {
   pgEnum,
   boolean,
   uniqueIndex,
+  timestamp,
 } from "drizzle-orm/pg-core";
 import { relations, SQL, sql } from "drizzle-orm";
 import { timestamps } from "./utils/helpers";
@@ -111,6 +112,13 @@ export const sneakerzDesignEnum = pgEnum("design", [
   "Super Hightops",
   "Trainer",
 ]);
+
+export const nonces = pgTable("nonces", {
+  id: text().primaryKey().notNull(),
+  expires: timestamp({ withTimezone: true, mode: "string" })
+    .default(sql`(now() + '00:10:00'::interval)`)
+    .notNull(),
+});
 
 export const ballerzTeams = pgTable(
   "ballerz_teams",
