@@ -1,10 +1,7 @@
-import { SignOutButton } from "../sign-out-button";
-
 export default function BallerzPage() {
   return (
-    <div>
+    <div className="container w-full mx-auto py-2 px-4 sm:px-6 lg:px-8">
       <h1>Ballerz</h1>
-      <SignOutButton />
     </div>
   );
 }

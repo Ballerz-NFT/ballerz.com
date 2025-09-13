@@ -4,15 +4,13 @@ import { JwtPayload } from "@supabase/supabase-js";
 export type Session = {
   user: {
     id: string;
-    email?: string;
-    full_name?: string;
+    wallet_address: string;
   };
 };
 
 type SupabaseJWTPayload = JwtPayload & {
-  user_metadata?: {
-    email?: string;
-    full_name?: string;
+  app_metadata?: {
+    wallet_address?: string;
     [key: string]: string | undefined;
   };
 };
@@ -27,11 +25,12 @@ export async function verifyAccessToken(): Promise<Session | null> {
 
     const claims = data.claims as SupabaseJWTPayload;
 
+    if (!claims.app_metadata?.wallet_address) return null;
+
     return {
       user: {
         id: claims.sub!,
-        email: claims.user_metadata?.email,
-        full_name: claims.user_metadata?.full_name,
+        wallet_address: claims.app_metadata.wallet_address!,
       },
     };
   } catch (error) {

@@ -49,20 +49,20 @@ export async function updateSession(request: NextRequest) {
     newUrl.search
   }`;
 
-  if (
-    !user &&
-    newUrl.pathname !== "/login" &&
-    newUrl.pathname !== "/" &&
-    newUrl.pathname.includes("/ballerz")
-  ) {
-    const url = new URL("/login", request.url);
+  // if (
+  //   !user &&
+  //   newUrl.pathname !== "/login" &&
+  //   newUrl.pathname !== "/" &&
+  //   newUrl.pathname.includes("/ballerz")
+  // ) {
+  //   const url = new URL("/login", request.url);
 
-    if (encodedSearchParams) {
-      url.searchParams.append("return_to", encodedSearchParams);
-    }
+  //   if (encodedSearchParams) {
+  //     url.searchParams.append("return_to", encodedSearchParams);
+  //   }
 
-    return NextResponse.redirect(url);
-  }
+  //   return NextResponse.redirect(url);
+  // }
 
   if (user && newUrl.pathname.includes("/login")) {
     const url = new URL("/", request.url);

@@ -1,0 +1,749 @@
+{
+  "id": "7ae7277b-65fa-4391-8d7a-b3572c429f03",
+  "prevId": "df33f9b5-79b0-4cf9-bdb9-19af7326c878",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.ballerz": {
+      "name": "ballerz",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "role": {
+          "name": "role",
+          "type": "role",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "image": {
+          "name": "image",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "team_id": {
+          "name": "team_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "gender": {
+          "name": "gender",
+          "type": "gender",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "jersey": {
+          "name": "jersey",
+          "type": "jersey",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "number": {
+          "name": "number",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "face": {
+          "name": "face",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hair": {
+          "name": "hair",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "hair_color": {
+          "name": "hair_color",
+          "type": "hair_color",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'Other'"
+        },
+        "hair_style": {
+          "name": "hair_style",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "body": {
+          "name": "body",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "accessories": {
+          "name": "accessories",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{\"\"}'"
+        },
+        "shooting": {
+          "name": "shooting",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "playmaking": {
+          "name": "playmaking",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "defense": {
+          "name": "defense",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dunks": {
+          "name": "dunks",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "position": {
+          "name": "position",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "type": "stored",
+            "as": "\n        CASE\n            WHEN (((GREATEST(\"ballerz\".\"dunks\", \"ballerz\".\"shooting\", \"ballerz\".\"playmaking\") = \"ballerz\".\"playmaking\") AND (LEAST(\"ballerz\".\"dunks\", \"ballerz\".\"shooting\", \"ballerz\".\"playmaking\") = \"ballerz\".\"dunks\") AND ((\"ballerz\".\"playmaking\" - \"ballerz\".\"dunks\") > 5) AND (\"ballerz\".\"shooting\" < (\"ballerz\".\"playmaking\" - 2))) OR ((\"ballerz\".\"playmaking\" - \"ballerz\".\"dunks\") > 15)) THEN 'PG'::text\n            WHEN ((GREATEST(\"ballerz\".\"dunks\", \"ballerz\".\"shooting\", \"ballerz\".\"playmaking\") = \"ballerz\".\"dunks\") AND (LEAST(\"ballerz\".\"dunks\", \"ballerz\".\"shooting\", \"ballerz\".\"playmaking\") = \"ballerz\".\"playmaking\")) THEN 'C'::text\n            WHEN ((GREATEST(\"ballerz\".\"dunks\", \"ballerz\".\"shooting\", \"ballerz\".\"playmaking\") - LEAST(\"ballerz\".\"dunks\", \"ballerz\".\"shooting\", \"ballerz\".\"playmaking\")) <= 8) THEN 'SF'::text\n            WHEN (\"ballerz\".\"shooting\" > \"ballerz\".\"dunks\") THEN 'SG'::text\n            WHEN (\"ballerz\".\"dunks\" >= \"ballerz\".\"shooting\") THEN 'PF'::text\n            ELSE ''::text\n        END\n      "
+          }
+        },
+        "overall": {
+          "name": "overall",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "type": "stored",
+            "as": "round(((float8((((\"ballerz\".\"dunks\" + \"ballerz\".\"shooting\") + \"ballerz\".\"playmaking\") + \"ballerz\".\"defense\")) / (4)::double precision))::numeric, 2)"
+          }
+        },
+        "nft_contract": {
+          "name": "nft_contract",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nft_id": {
+          "name": "nft_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nft_slug": {
+          "name": "nft_slug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "mvp": {
+          "name": "mvp",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ballerz_team_id_ballerz_teams_id_fk": {
+          "name": "ballerz_team_id_ballerz_teams_id_fk",
+          "tableFrom": "ballerz",
+          "columnsFrom": [
+            "team_id"
+          ],
+          "tableTo": "ballerz_teams",
+          "columnsTo": [
+            "id"
+          ],
+          "onUpdate": "no action",
+          "onDelete": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "ballerz_nft_id_unique": {
+          "name": "ballerz_nft_id_unique",
+          "columns": [
+            "nft_id"
+          ],
+          "nullsNotDistinct": false
+        },
+        "ballerz_nft_slug_unique": {
+          "name": "ballerz_nft_slug_unique",
+          "columns": [
+            "nft_slug"
+          ],
+          "nullsNotDistinct": false
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ballerz_meta": {
+      "name": "ballerz_meta",
+      "schema": "",
+      "columns": {
+        "baller_id": {
+          "name": "baller_id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ballerz_meta_baller_id_ballerz_id_fk": {
+          "name": "ballerz_meta_baller_id_ballerz_id_fk",
+          "tableFrom": "ballerz_meta",
+          "columnsFrom": [
+            "baller_id"
+          ],
+          "tableTo": "ballerz",
+          "columnsTo": [
+            "id"
+          ],
+          "onUpdate": "no action",
+          "onDelete": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "ballerz_meta_name_length_check": {
+          "name": "ballerz_meta_name_length_check",
+          "value": "(\"ballerz_meta\".\"name\" IS NULL) OR ((char_length(TRIM(BOTH FROM \"ballerz_meta\".\"name\")) >= 3) AND (char_length(TRIM(BOTH FROM \"ballerz_meta\".\"name\")) <= 50))"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.ballerz_teams": {
+      "name": "ballerz_teams",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "name": "ballerz_teams_id_seq",
+            "increment": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "startWith": "1",
+            "cache": "1",
+            "cycle": false,
+            "schema": "public",
+            "type": "always"
+          }
+        },
+        "name": {
+          "name": "name",
+          "type": "team",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "gender": {
+          "name": "gender",
+          "type": "gender",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "logo": {
+          "name": "logo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "abbrev": {
+          "name": "abbrev",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "primary_color": {
+          "name": "primary_color",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "secondary_color": {
+          "name": "secondary_color",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "ballerz_team_name_idx": {
+          "name": "ballerz_team_name_idx",
+          "columns": [
+            {
+              "expression": "name",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "with": {},
+          "method": "btree",
+          "concurrently": false
+        },
+        "ballerz_team_abbrev_idx": {
+          "name": "ballerz_team_abbrev_idx",
+          "columns": [
+            {
+              "expression": "abbrev",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "with": {},
+          "method": "btree",
+          "concurrently": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "ballerz_teams_name_unique": {
+          "name": "ballerz_teams_name_unique",
+          "columns": [
+            "name"
+          ],
+          "nullsNotDistinct": false
+        }
+      },
+      "policies": {},
+      "checkConstraints": {
+        "abbrev_check": {
+          "name": "abbrev_check",
+          "value": "char_length(TRIM(BOTH FROM \"ballerz_teams\".\"abbrev\")) >= 2 AND char_length(TRIM(BOTH FROM \"ballerz_teams\".\"abbrev\")) <= 3"
+        },
+        "primary_color_check": {
+          "name": "primary_color_check",
+          "value": "starts_with(\"ballerz_teams\".\"primary_color\", '#') AND char_length(\"ballerz_teams\".\"primary_color\") = 7"
+        },
+        "secondary_color_check": {
+          "name": "secondary_color_check",
+          "value": "starts_with(\"ballerz_teams\".\"secondary_color\", '#') AND char_length(\"ballerz_teams\".\"secondary_color\") = 7"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.nonces": {
+      "name": "nonces",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "expires": {
+          "name": "expires",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "(now() + '00:10:00'::interval)"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.sneakerz": {
+      "name": "sneakerz",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "image": {
+          "name": "image",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "background": {
+          "name": "background",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "color_1": {
+          "name": "color_1",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "color_2": {
+          "name": "color_2",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "color_3": {
+          "name": "color_3",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "color_4": {
+          "name": "color_4",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "design": {
+          "name": "design",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "style": {
+          "name": "style",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "accessory": {
+          "name": "accessory",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "enhancement": {
+          "name": "enhancement",
+          "type": "enhancement",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rarity": {
+          "name": "rarity",
+          "type": "rarity",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "jump": {
+          "name": "jump",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "drip_factor": {
+          "name": "drip_factor",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "has_number": {
+          "name": "has_number",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "type": "stored",
+            "as": "\"sneakerz\".\"style\" = '210'"
+          }
+        },
+        "is_team_color": {
+          "name": "is_team_color",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "type": "stored",
+            "as": "\"sneakerz\".\"style\" ~ '^.+ [0-9]{3}$'"
+          }
+        },
+        "team_name": {
+          "name": "team_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "type": "stored",
+            "as": "CASE \n        WHEN style ~ '^.+ [0-9]{3}$' THEN REGEXP_REPLACE(style, ' [0-9]{3}$', '')\n        ELSE NULL\n    END"
+          }
+        },
+        "team_id": {
+          "name": "team_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "sneakerz_team_id_ballerz_teams_id_fk": {
+          "name": "sneakerz_team_id_ballerz_teams_id_fk",
+          "tableFrom": "sneakerz",
+          "columnsFrom": [
+            "team_id"
+          ],
+          "tableTo": "ballerz_teams",
+          "columnsTo": [
+            "id"
+          ],
+          "onUpdate": "no action",
+          "onDelete": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.users": {
+      "name": "users",
+      "schema": "",
+      "columns": {
+        "wallet_address": {
+          "name": "wallet_address",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "username": {
+          "name": "username",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "avatar_url": {
+          "name": "avatar_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "users_username_unique": {
+          "name": "users_username_unique",
+          "columns": [
+            "username"
+          ],
+          "nullsNotDistinct": false
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "public.hair_color": {
+      "name": "hair_color",
+      "schema": "public",
+      "values": [
+        "Orange",
+        "Blue",
+        "Light Brown",
+        "Red",
+        "Blonde",
+        "Purple",
+        "Pink",
+        "Black",
+        "Other",
+        "Brown",
+        "Brunette",
+        "Light Brunette",
+        "Custom"
+      ]
+    },
+    "public.jersey": {
+      "name": "jersey",
+      "schema": "public",
+      "values": [
+        "Home",
+        "Away"
+      ]
+    },
+    "public.role": {
+      "name": "role",
+      "schema": "public",
+      "values": [
+        "Player",
+        "Captain",
+        "All-Star"
+      ]
+    },
+    "public.team": {
+      "name": "team",
+      "schema": "public",
+      "values": [
+        "All-Stars",
+        "Team Dapper (W)",
+        "Team Flow (W)",
+        "Team Dapper (M)",
+        "Team Flow (M)",
+        "Miami Tentacles",
+        "Boulder Elks",
+        "San Jose Sirens",
+        "Charlotte Clovers",
+        "New York Golden Bulls",
+        "Pennsylvania Fangs",
+        "Austin Machines",
+        "Phoenix Skulls",
+        "Salt Lake City Souls",
+        "Las Vegas Scorpions",
+        "New York Torches",
+        "Omaha Bullsnakes",
+        "D.C. Dobermans",
+        "San Francisco Surge",
+        "Dallas Pythons",
+        "Alabama Kingpins",
+        "Los Angeles Knives",
+        "Orlando Freeze",
+        "St. Louis Orcs",
+        "Helena Pronghorns",
+        "Alaska Whales",
+        "New Jersey Scientists",
+        "New Orleans Giants",
+        "Los Angeles Mammoths",
+        "Sierra Spiders",
+        "Tampa Bay Omens",
+        "Iowa City Rattlesnakes",
+        "Toronto Spears",
+        "Minneapolis Express",
+        "Boston Rulers",
+        "Michigan Colliders",
+        "Portland Bats",
+        "Portland Creatures",
+        "Cleveland Firebirds",
+        "Seattle Scream",
+        "San Diego Keepers",
+        "Wisconsin Dragons",
+        "Delaware Horsemen",
+        "Houston Rogues",
+        "Nashville Miracle",
+        "Chicago Squid",
+        "Tallahassee Tarantulas"
+      ]
+    },
+    "public.gender": {
+      "name": "gender",
+      "schema": "public",
+      "values": [
+        "M",
+        "W"
+      ]
+    },
+    "public.design": {
+      "name": "design",
+      "schema": "public",
+      "values": [
+        "Cross Trainer",
+        "Hightop",
+        "Lowtop",
+        "Super Hightop",
+        "Super Hightops",
+        "Trainer"
+      ]
+    },
+    "public.enhancement": {
+      "name": "enhancement",
+      "schema": "public",
+      "values": [
+        "Ankle Breaker",
+        "Bullseye",
+        "Drive the Lane",
+        "Stopping on a Dime"
+      ]
+    },
+    "public.rarity": {
+      "name": "rarity",
+      "schema": "public",
+      "values": [
+        "Common",
+        "Custom",
+        "Iconic",
+        "Legendary",
+        "Rare",
+        "Uncommon"
+      ]
+    }
+  },
+  "schemas": {},
+  "views": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

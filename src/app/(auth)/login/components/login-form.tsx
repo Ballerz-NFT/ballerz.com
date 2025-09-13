@@ -6,8 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import WalletConnectButton from "./wallet-connect-button";
 import { Suspense } from "react";
+import { WalletConnectButton } from "@/components/wallet-connect-button";
 
 export function LoginForm({
   className,
@@ -26,7 +26,9 @@ export function LoginForm({
           <div className="grid gap-6">
             <div className="flex flex-col gap-4">
               <Suspense>
-                <WalletConnectButton />
+                <WalletConnectButton size="lg" className="w-full">
+                  Login with WalletConnect
+                </WalletConnectButton>
               </Suspense>
             </div>
           </div>

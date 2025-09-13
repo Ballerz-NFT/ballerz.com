@@ -263,3 +263,9 @@ export const sneakerzRelations = relations(sneakerz, ({ one }) => ({
     references: [ballerzTeams.id],
   }),
 }));
+
+export const users = pgTable("users", {
+  walletAddress: text("wallet_address").primaryKey().notNull(),
+  username: text().unique(),
+  avatarUrl: text("avatar_url"),
+});

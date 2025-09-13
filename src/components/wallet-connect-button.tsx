@@ -2,20 +2,30 @@
 
 import { Button } from "@/components/ui/button";
 import { useWalletConnect } from "@/hooks/use-wallet-connect";
+import { cn } from "@/lib/utils";
 import { LoaderIcon } from "lucide-react";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
-export default function WalletConnectButton() {
+export function WalletConnectButton({
+  size,
+  className,
+  children,
+}: Readonly<{
+  size?: "default" | "sm" | "lg" | "icon" | null;
+  className?: string;
+  children?: React.ReactNode;
+}>) {
   const searchParams = useSearchParams();
-  const redirectTo = searchParams.get("return_to") ?? "/";
+  const pathname = usePathname();
+  const redirectTo = searchParams.get("return_to") ?? pathname;
 
   const { signIn, isLoading } = useWalletConnect({ redirectTo });
 
   return (
     <Button
       onClick={signIn}
-      className="w-full bg-[#3B99FC] hover:bg-[#3B99FC]/90 text-white"
-      size="lg"
+      className={cn("bg-[#3B99FC] hover:bg-[#3B99FC]/90 text-white", className)}
+      size={size}
       disabled={isLoading}
     >
       {isLoading ? (
@@ -28,7 +38,7 @@ export default function WalletConnectButton() {
           />
         </svg>
       )}
-      Login with WalletConnect
+      {children}
     </Button>
   );
 }
